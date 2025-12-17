@@ -1,86 +1,191 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MC Server 官网</title>
+<meta charset="UTF-8" />
+<title>MCSEVER</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="MCSEVER · Minecraft 1.21.4 原版生电服务器" />
+
 <style>
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  margin: 0; background-color: #f5f5f5; color: #333;
+:root{
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --text:#1d1d1f;
+  --sub:#6e6e73;
+  --border:#e5e5e7;
+  --accent:#0071e3;
 }
-header {
-  display: flex; align-items: center; justify-content: space-between;
-  background-color: #fff; padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
-header .logo { height: 40px; }
-nav a {
-  margin-left: 20px; text-decoration: none; color: #007aff; font-weight: 500;
+
+/* 顶部导航 */
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
 }
-main { max-width: 900px; margin: 20px auto; padding: 0 20px; }
-section { margin-bottom: 40px; }
-section h2 { font-size: 1.8em; margin-bottom: 10px; }
-.btn {
-  display: inline-block; background-color: #007aff; color: white;
-  padding: 10px 20px; border-radius: 12px; text-decoration: none;
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:16px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
-footer { text-align: center; padding: 20px; color: #999; font-size: 0.9em; }
-#hero {
-  background-color: #fff; padding: 60px 20px; text-align: center;
-  border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 40px;
+.nav .logo{font-weight:600;letter-spacing:.4px}
+.nav a{
+  margin-left:28px;
+  text-decoration:none;
+  font-size:14px;
+  color:var(--text);
 }
-#hero h1 { font-size: 2.5em; margin-bottom: 10px; }
-#hero p { font-size: 1.2em; margin-bottom: 20px; color: #555; }
-ul { list-style: none; padding: 0; }
-ul li { margin-bottom: 10px; }
+
+/* Hero */
+main{max-width:1200px;margin:auto;padding:120px 24px 0}
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:80px;
+  align-items:center;
+}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+}
+.hero h1{
+  font-size:64px;
+  line-height:1.05;
+  margin:0 0 28px;
+}
+.hero p{
+  font-size:20px;
+  color:var(--sub);
+  max-width:640px;
+}
+.actions{margin-top:48px}
+.actions a{
+  display:inline-block;
+  margin-right:24px;
+  font-size:16px;
+  text-decoration:none;
+}
+.primary{
+  background:var(--accent);
+  color:#fff;
+  padding:16px 34px;
+  border-radius:999px;
+}
+.secondary{color:var(--accent)}
+
+.hero-card{
+  background:var(--card);
+  border-radius:28px;
+  padding:48px;
+  box-shadow:0 30px 60px rgba(0,0,0,.12);
+}
+.hero-card h3{margin:0 0 16px;font-size:22px}
+.hero-card ul{padding-left:18px;margin:0;color:var(--sub);line-height:1.8}
+
+/* Sections */
+.section{
+  margin-top:160px;
+}
+.section h2{
+  font-size:40px;
+  margin:0 0 48px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:48px;
+}
+.card{
+  background:var(--card);
+  border-radius:24px;
+  padding:40px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+.card h3{margin:0 0 14px;font-size:22px}
+.card p{margin:0;color:var(--sub);line-height:1.6}
+
+/* Footer */
+footer{
+  margin-top:160px;
+  border-top:1px solid var(--border);
+  padding:56px 24px 80px;
+  text-align:center;
+  color:var(--sub);
+  font-size:14px;
+}
 </style>
 </head>
 <body>
+
 <header>
-  <img src="https://via.placeholder.com/150x40?text=MC+Server" alt="MC Server Logo" class="logo">
-  <nav>
-    <a href="#about">关于服务器</a>
-    <a href="#download">客户端下载</a>
-    <a href="#connect">连接服务器</a>
-    <a href="#contact">联系我们</a>
-  </nav>
+  <div class="nav">
+    <div class="logo">MCSEVER</div>
+    <div>
+      <a href="https://pan.mcsever.site">下载</a>
+      <a href="https://connect.mcsever.site">服务器地址</a>
+    </div>
+  </div>
 </header>
 
 <main>
-<section id="hero">
-  <h1>欢迎来到 MC Server</h1>
-  <p>版本：1.21.4 原版生存/创造</p>
-  <a href="#connect" class="btn">获取服务器地址</a>
-</section>
+  <section class="hero">
+    <div>
+      <h1>原版生电，<br>只做长期。</h1>
+      <p>
+        MCSEVER 是一个基于 Minecraft 1.21.4 的原版生电服务器，
+        拒绝快餐玩法，尊重原版机制，为大型工程和长期世界而存在。
+      </p>
+      <div class="actions">
+        <a class="primary" href="https://connect.mcsever.site">获取服务器地址</a>
+        <a class="secondary" href="https://pan.mcsever.site">下载客户端</a>
+      </div>
+    </div>
 
-<section id="about">
-  <h2>关于服务器</h2>
-  <p>MC Server 提供稳定、高速的原版 1.21.4 生存/创造玩法，特色社区活动和友好环境。</p>
-</section>
+    <div class="hero-card">
+      <h3>服务器信息</h3>
+      <ul>
+        <li>Minecraft Java Edition</li>
+        <li>版本：1.21.4</li>
+        <li>类型：原版 / 生电 / 长期存档</li>
+        <li>地址获取：Cloudflare 验证后显示</li>
+      </ul>
+    </div>
+  </section>
 
-<section id="download">
-  <h2>客户端下载</h2>
-  <ul>
-    <li><a href="#">客户端下载（分卷一）</a></li>
-    <li><a href="#">客户端下载（分卷二，密码：123456）</a></li>
-  </ul>
-</section>
-
-<section id="connect">
-  <h2>连接服务器</h2>
-  <p>请点击下面按钮通过验证后获取服务器地址：</p>
-  <a href="https://mcsever.site/connect" class="btn">获取服务器地址</a>
-</section>
-
-<section id="contact">
-  <h2>联系我们</h2>
-  <p>邮箱：mresy@mcsever.site</p>
-</section>
+  <section class="section">
+    <h2>为什么选择 MCSEVER</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>坚持原版</h3>
+        <p>不添加破坏平衡的模组，完整保留 Mojang 原版机制，适合红石与技术玩家。</p>
+      </div>
+      <div class="card">
+        <h3>安全与隐私</h3>
+        <p>服务器真实地址不公开，通过 Cloudflare 人机验证获取，有效防扫描、防攻击。</p>
+      </div>
+      <div class="card">
+        <h3>长期世界</h3>
+        <p>拒绝短期周目，世界长期保留，适合大型生电工程与长期规划。</p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
-<p>&copy; 2025 MC Server. All Rights Reserved.</p>
+  <div>联系邮箱：mresy@mcsever.site</div>
+  <div>© MCSEVER</div>
 </footer>
+
 </body>
 </html>
