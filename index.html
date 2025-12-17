@@ -19,8 +19,9 @@
 html,body{margin:0;padding:0}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  background:var(--bg);
   color:var(--text);
+  background:var(--bg);
+  scroll-behavior:smooth;
 }
 
 /* 顶部导航 */
@@ -48,60 +49,61 @@ header{
   color:var(--text);
 }
 
-/* Hero */
-main{max-width:1200px;margin:auto;padding:120px 24px 0}
-.hero{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:80px;
+/* Hero 首屏 */
+.hero-container{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
   align-items:center;
+  text-align:center;
+  background:linear-gradient(135deg,#f5f5f7,#eaeaea);
 }
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr}
-}
-.hero h1{
-  font-size:64px;
+.hero-container h1{
+  font-size:72px;
+  margin:0;
   line-height:1.05;
-  margin:0 0 28px;
 }
-.hero p{
-  font-size:20px;
-  color:var(--sub);
+.hero-container p{
+  font-size:22px;
+  margin-top:24px;
   max-width:640px;
+  color:var(--sub);
 }
-.actions{margin-top:48px}
-.actions a{
+.hero-actions{
+  margin-top:48px;
+}
+.hero-actions a{
   display:inline-block;
-  margin-right:24px;
-  font-size:16px;
+  margin:0 16px;
+  font-size:18px;
   text-decoration:none;
-}
-.primary{
-  background:var(--accent);
-  color:#fff;
-  padding:16px 34px;
+  padding:16px 36px;
   border-radius:999px;
 }
-.secondary{color:var(--accent)}
+.primary{background:var(--accent);color:#fff}
+.secondary{color:var(--accent);border:1px solid var(--accent)}
 
-.hero-card{
-  background:var(--card);
-  border-radius:28px;
-  padding:48px;
-  box-shadow:0 30px 60px rgba(0,0,0,.12);
-}
-.hero-card h3{margin:0 0 16px;font-size:22px}
-.hero-card ul{padding-left:18px;margin:0;color:var(--sub);line-height:1.8}
-
-/* Sections */
+/* 分镜 Section */
 .section{
-  margin-top:160px;
+  padding:120px 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  opacity:0;
+  transform:translateY(50px);
+  transition:all .9s cubic-bezier(.4,0,.2,1);
+}
+.section.show{
+  opacity:1;
+  transform:translateY(0);
 }
 .section h2{
   font-size:40px;
-  margin:0 0 48px;
+  margin-bottom:48px;
 }
-.grid{
+.section .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:48px;
@@ -117,12 +119,17 @@ main{max-width:1200px;margin:auto;padding:120px 24px 0}
 
 /* Footer */
 footer{
-  margin-top:160px;
   border-top:1px solid var(--border);
   padding:56px 24px 80px;
   text-align:center;
   color:var(--sub);
   font-size:14px;
+}
+
+/* 深色模式 */
+@media(prefers-color-scheme:dark){
+  :root{--bg:#000000;--card:#1c1c1e;--text:#f5f5f7;--sub:#a1a1a6;--border:#2c2c2e;}
+  header{background:rgba(28,28,30,.8);backdrop-filter:blur(24px)}
 }
 </style>
 </head>
@@ -138,46 +145,22 @@ footer{
   </div>
 </header>
 
+<div class="hero-container">
+  <h1>原版生电，<br>只做长期</h1>
+  <p>MCSEVER 是一个基于 Minecraft 1.21.4 的原版生电服务器，专注长期存档和技术玩法。</p>
+  <div class="hero-actions">
+    <a class="primary" href="https://connect.mcsever.site">获取服务器地址</a>
+    <a class="secondary" href="https://pan.mcsever.site">下载客户端</a>
+  </div>
+</div>
+
 <main>
-  <section class="hero">
-    <div>
-      <h1>原版生电，<br>只做长期。</h1>
-      <p>
-        MCSEVER 是一个基于 Minecraft 1.21.4 的原版生电服务器，
-        拒绝快餐玩法，尊重原版机制，为大型工程和长期世界而存在。
-      </p>
-      <div class="actions">
-        <a class="primary" href="https://connect.mcsever.site">获取服务器地址</a>
-        <a class="secondary" href="https://pan.mcsever.site">下载客户端</a>
-      </div>
-    </div>
-
-    <div class="hero-card">
-      <h3>服务器信息</h3>
-      <ul>
-        <li>Minecraft Java Edition</li>
-        <li>版本：1.21.4</li>
-        <li>类型：原版 / 生电 / 长期存档</li>
-        <li>地址获取：Cloudflare 验证后显示</li>
-      </ul>
-    </div>
-  </section>
-
   <section class="section">
     <h2>为什么选择 MCSEVER</h2>
     <div class="grid">
-      <div class="card">
-        <h3>坚持原版</h3>
-        <p>不添加破坏平衡的模组，完整保留 Mojang 原版机制，适合红石与技术玩家。</p>
-      </div>
-      <div class="card">
-        <h3>安全与隐私</h3>
-        <p>服务器真实地址不公开，通过 Cloudflare 人机验证获取，有效防扫描、防攻击。</p>
-      </div>
-      <div class="card">
-        <h3>长期世界</h3>
-        <p>拒绝短期周目，世界长期保留，适合大型生电工程与长期规划。</p>
-      </div>
+      <div class="card"><h3>坚持原版</h3><p>不添加破坏平衡的模组，完整保留 Mojang 原版机制，适合红石与技术玩家。</p></div>
+      <div class="card"><h3>安全与隐私</h3><p>服务器真实地址通过 Cloudflare 验证获取，有效防扫描、防攻击。</p></div>
+      <div class="card"><h3>长期世界</h3><p>拒绝短期周目，世界长期保留，适合大型工程和长期规划。</p></div>
     </div>
   </section>
 </main>
@@ -186,6 +169,17 @@ footer{
   <div>联系邮箱：mresy@mcsever.site</div>
   <div>© MCSEVER</div>
 </footer>
+
+<script>
+// 滚动分镜动画
+const sections=document.querySelectorAll('.section');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('show');}
+  });
+},{threshold:.15});
+sections.forEach(s=>observer.observe(s));
+</script>
 
 </body>
 </html>
