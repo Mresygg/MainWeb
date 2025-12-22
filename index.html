@@ -2,42 +2,35 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mresy | MCSEVER 官方网站</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Mresy | MCSEVER Official</title>
+  <meta name="description" content="Mresy 的 MCSEVER 官方网站。提供客户端与公告信息。" />
   <link rel="canonical" href="https://mcsever.site/" />
-  <meta name="description" content="MCSEVER 官方主页：获取服务器地址与下载客户端。" />
-  <meta name="author" content="Mresy" />
 
   <style>
     :root{
-      --bg1:#f7f7f8;
-      --bg2:#ffffff;
-      --text:#111827;
-      --muted:#6b7280;
-      --line:rgba(17,24,39,.10);
-      --btn:#0a66ff;
-      --btnText:#fff;
-      --btn2bg:#ffffff;
-      --btn2text:#0a66ff;
-      --btn2line:rgba(10,102,255,.35);
-      --shadow: 0 18px 55px rgba(0,0,0,.10);
+      --bg1:#f7f8fb; --bg2:#ffffff;
+      --text:#0b1220; --muted:rgba(11,18,32,.62);
+      --line:rgba(15,23,42,.10);
+      --card: rgba(255,255,255,.62);
+      --shadow: 0 28px 90px rgba(0,0,0,.12);
+      --shadow2: 0 14px 44px rgba(0,0,0,.10);
+      --accent:#0a66ff;
+      --accentSoft: rgba(10,102,255,.16);
+      --radius: 26px; --pill: 999px; --blur: 18px;
     }
     @media (prefers-color-scheme: dark){
       :root{
-        --bg1:#0b0f17;
-        --bg2:#080b12;
-        --text:#e5e7eb;
-        --muted:rgba(229,231,235,.68);
+        --bg1:#0b0f17; --bg2:#070a10;
+        --text:#eef2ff; --muted:rgba(238,242,255,.62);
         --line:rgba(255,255,255,.10);
-        --btn:#2f7dff;
-        --btnText:#081018;
-        --btn2bg:rgba(255,255,255,.06);
-        --btn2text:#dbeafe;
-        --btn2line:rgba(47,125,255,.45);
-        --shadow: 0 18px 65px rgba(0,0,0,.55);
+        --card: rgba(18,20,28,.62);
+        --shadow: 0 34px 120px rgba(0,0,0,.62);
+        --shadow2: 0 18px 54px rgba(0,0,0,.45);
+        --accent:#2f7dff;
+        --accentSoft: rgba(47,125,255,.20);
       }
     }
-
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
@@ -47,209 +40,342 @@
       -webkit-font-smoothing: antialiased;
       color:var(--text);
       background:
-        radial-gradient(1200px 700px at 50% 40%, rgba(10,102,255,.10), transparent 55%),
-        radial-gradient(900px 600px at 20% 20%, rgba(0,0,0,.06), transparent 60%),
+        radial-gradient(1200px 740px at 50% 30%, var(--accentSoft), transparent 62%),
+        radial-gradient(900px 650px at 18% 18%, rgba(0,0,0,.05), transparent 60%),
+        radial-gradient(900px 650px at 85% 72%, rgba(0,0,0,.05), transparent 60%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
     }
-
     body:before{
       content:"";
-      position:fixed;
-      inset:0;
+      position:fixed; inset:0;
       pointer-events:none;
-      opacity:.08;
+      opacity:.085;
       mix-blend-mode: overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-      background-size:160px 160px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      background-size:180px 180px;
     }
-
-    .wrap{ min-height:100%; display:flex; flex-direction:column; }
 
     .topbar{
       height:64px;
       display:flex;
-      align-items:center;
       justify-content:center;
+      align-items:center;
       border-bottom:1px solid var(--line);
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.52);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
       position: sticky;
       top:0;
       z-index:10;
     }
     @media (prefers-color-scheme: dark){
-      .topbar{ background: rgba(10,12,18,.55); }
+      .topbar{ background: rgba(10,12,18,.58); }
     }
-
     .topbar-inner{
-      width: min(1100px, calc(100% - 48px));
+      width: min(1120px, calc(100% - 48px));
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
       gap:16px;
     }
-
     .brand{
-      font-weight: 700;
-      letter-spacing: .28em;
-      font-size: 14px;
+      font-weight:800;
+      letter-spacing:.28em;
+      font-size:14px;
       user-select:none;
     }
-
     .nav{
       display:flex;
       align-items:center;
-      gap: 18px;
+      gap: 10px;
       color: var(--muted);
-      font-size: 14px;
+      font-size:14px;
     }
     .nav a{
-      color: inherit;
+      color:inherit;
       text-decoration:none;
       padding: 8px 10px;
-      border-radius: 999px;
+      border-radius: var(--pill);
       transition: background .15s ease, color .15s ease;
     }
     .nav a:hover{
       color: var(--text);
-      background: rgba(17,24,39,.06);
+      background: rgba(15,23,42,.06);
     }
     @media (prefers-color-scheme: dark){
       .nav a:hover{ background: rgba(255,255,255,.06); }
     }
 
-    /* Google translate container */
-    #google_translate_element{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-    }
-    .goog-te-gadget{ font-family: inherit !important; }
-    .goog-te-gadget span{ display:none !important; } /* hide “Powered by” text row */
-    .goog-te-combo{
-      border:1px solid var(--line) !important;
-      border-radius:999px !important;
-      padding:8px 12px !important;
-      background: rgba(255,255,255,.55) !important;
-      backdrop-filter: blur(10px) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
-      color: var(--text) !important;
-      outline:none !important;
-      font-size:13px !important;
-      cursor:pointer !important;
+    .lang{
+      appearance:none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.54);
+      color: var(--text);
+      border-radius: var(--pill);
+      padding: 8px 12px;
+      font-weight: 650;
+      font-size: 13px;
+      cursor:pointer;
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
     }
     @media (prefers-color-scheme: dark){
-      .goog-te-combo{ background: rgba(255,255,255,.06) !important; }
+      .lang{ background: rgba(255,255,255,.06); }
     }
 
-    .hero{
-      flex:1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 64px 24px 84px;
+    .wrap{
+      max-width: 1120px;
+      margin:0 auto;
+      padding: 78px 24px 92px;
+      text-align:center;
     }
-    .hero-inner{ width:min(980px,100%); text-align:center; }
-
+    .hero{ padding: 62px 18px 18px; }
     h1{
       margin:0;
-      font-size: clamp(42px, 6.2vw, 76px);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      font-size: clamp(44px, 6.4vw, 82px);
+      letter-spacing:-0.04em;
+      line-height:1.03;
     }
     .subtitle{
       margin: 18px auto 0;
-      max-width: 820px;
-      font-size: clamp(16px, 2.1vw, 20px);
+      max-width: 860px;
       color: var(--muted);
-      line-height: 1.75;
+      font-size: clamp(15px, 2vw, 18px);
+      line-height: 1.8;
     }
-    .cta{
-      margin-top: 38px;
+    .actions{
+      margin-top: 34px;
       display:flex;
-      gap: 14px;
       justify-content:center;
-      flex-wrap:wrap;
+      gap: 14px;
+      flex-wrap: wrap;
     }
     .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      padding: 14px 20px;
+      border-radius: var(--pill);
+      font-weight: 750;
+      font-size: 14px;
+      transition: transform .14s ease, filter .14s ease;
+      text-decoration:none;
       display:inline-flex;
       align-items:center;
-      justify-content:center;
-      min-width: 190px;
-      padding: 14px 22px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration:none;
-      border: 1px solid transparent;
-      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+      gap:10px;
       user-select:none;
     }
     .btn.primary{
-      background: var(--btn);
-      color: var(--btnText);
-      box-shadow: 0 16px 40px rgba(10,102,255,.22);
+      background: rgba(10,102,255,.96);
+      color: white;
+      box-shadow: 0 18px 48px rgba(10,102,255,.25);
     }
-    .btn.primary:hover{ transform: translateY(-1px); box-shadow: 0 20px 55px rgba(10,102,255,.26); }
     .btn.secondary{
-      background: var(--btn2bg);
-      color: var(--btn2text);
-      border-color: var(--btn2line);
-      box-shadow: var(--shadow);
+      background: rgba(255,255,255,.56);
+      color: var(--text);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      box-shadow: var(--shadow2);
     }
-    .btn.secondary:hover{ transform: translateY(-1px); }
+    @media (prefers-color-scheme: dark){
+      .btn.secondary{ background: rgba(255,255,255,.06); }
+    }
+    .btn:hover{ transform: translateY(-2px); }
+    .btn:active{ transform: translateY(0px); }
+
+    .grid{
+      margin-top: 44px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      text-align:left;
+    }
+    .card{
+      grid-column: span 6;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      overflow:hidden;
+      position:relative;
+      padding: 22px;
+    }
+    .card.full{ grid-column: span 12; }
+    .card h3{
+      margin: 8px 0 0;
+      font-size: 18px;
+      letter-spacing:-0.02em;
+    }
+    .card p{
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
 
     footer{
-      border-top: 1px solid var(--line);
-      padding: 18px 24px;
-      color: var(--muted);
+      margin-top: 26px;
+      color: rgba(11,18,32,.55);
       font-size: 12px;
       text-align:center;
     }
-  </style>
-
-  <!-- Google Translate: note it loads external script -->
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'zh-CN',
-        autoDisplay: false
-      }, 'google_translate_element');
+    @media (prefers-color-scheme: dark){
+      footer{ color: rgba(238,242,255,.55); }
     }
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    @media (max-width: 820px){
+      .card{ grid-column: span 12; }
+      .hero{ padding-top: 46px; }
+    }
+  </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="topbar-inner">
-        <div class="brand">MCSEVER</div>
-
-        <div class="nav">
-          <a href="https://pan.mcsever.site">下载</a>
-          <a href="https://connect.mcsever.site">服务器地址</a>
-          <div id="google_translate_element" title="Language"></div>
-        </div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">MCSEVER</div>
+      <div class="nav">
+        <a id="navHome" href="https://mcsever.site">Home</a>
+        <a id="navDownload" href="https://pan.mcsever.site">Download</a>
+        <select class="lang" id="langSelect" aria-label="Language">
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+          <option value="en">English</option>
+        </select>
       </div>
     </div>
+  </div>
 
-    <main class="hero">
-      <div class="hero-inner">
-        <h1>原版生电，<br/>只做长期</h1>
-        <p class="subtitle">
-          MCSEVER 是一个基于 Minecraft 1.21.4 的原版生电服务器，专注长期存档和技术玩法。
-        </p>
+  <main class="wrap">
+    <section class="hero">
+      <h1 id="h1">Mresy · MCSEVER 官方网站</h1>
+      <p class="subtitle" id="subtitle">提供客户端下载与公告信息。</p>
 
-        <div class="cta">
-          <a class="btn primary" href="https://connect.mcsever.site">获取服务器地址</a>
-          <a class="btn secondary" href="https://pan.mcsever.site">下载客户端</a>
-        </div>
+      <div class="actions">
+        <a class="btn primary" id="btnDownload" href="https://pan.mcsever.site">前往下载页</a>
       </div>
-    </main>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3 id="card1Title">客户端下载</h3>
+        <p id="card1Desc">提供主下载与备用下载入口。</p>
+      </div>
+
+      <div class="card">
+        <h3 id="card2Title">公告</h3>
+        <p id="card2Desc">更新与通知会在此同步。</p>
+      </div>
+
+      <div class="card full">
+        <h3 id="card3Title">关于</h3>
+      </div>
+    </section>
 
     <footer>© 2025 mcsever.site · Mresy</footer>
-  </div>
+  </main>
+
+  <script>
+    const I18N = {
+      "zh-CN": {
+        navHome: "主页",
+        navDownload: "下载",
+        h1: "Mresy · MCSEVER 官方网站",
+        subtitle: "提供客户端下载与公告信息。",
+        btnDownload: "前往下载页",
+        btnBili: "社交入口",
+        card1Title: "客户端下载",
+        card1Desc: "提供主下载与备用下载入口。",
+        card2Title: "公告",
+        card2Desc: "更新与通知会在此同步。",
+        card3Title: "关于",
+      },
+      "zh-TW": {
+        navHome: "主頁",
+        navDownload: "下載",
+        h1: "Mresy · MCSEVER 官方網站",
+        subtitle: "提供客戶端下載與公告資訊。",
+        btnDownload: "前往下載頁",
+        btnBili: "社交入口",
+        card1Title: "客戶端下載",
+        card1Desc: "提供主下載與備用下載入口。",
+        card2Title: "公告",
+        card2Desc: "更新與通知會在此同步。",
+        card3Title: "關於",
+      },
+      "ja": {
+        navHome: "ホーム",
+        navDownload: "ダウンロード",
+        h1: "Mresy · MCSEVER 公式サイト",
+        subtitle: "クライアント配布とお知らせを掲載します。",
+        btnDownload: "ダウンロードへ",
+        btnBili: "ソーシャル",
+        card1Title: "クライアント配布",
+        card1Desc: "メイン/予備のダウンロード入口。",
+        card2Title: "お知らせ",
+        card2Desc: "更新情報をここで案内します。",
+        card3Title: "概要",
+      },
+      "en": {
+        navHome: "Home",
+        navDownload: "Download",
+        h1: "Mresy · MCSEVER Official Site",
+        subtitle: "Client downloads and announcements.",
+        btnDownload: "Open Downloads",
+        btnBili: "Social",
+        card1Title: "Client Download",
+        card1Desc: "Main and backup download entries.",
+        card2Title: "Announcements",
+        card2Desc: "Updates and notices are posted here.",
+        card3Title: "About",
+        card3Desc: "Official entry point (no server address is published)."
+      }
+    };
+
+    function pickLang() {
+      const saved = localStorage.getItem("mcsever_lang");
+      if (saved && I18N[saved]) return saved;
+      const raw = (navigator.language || "en").toLowerCase();
+      if (raw.startsWith("ja")) return "ja";
+      if (raw.startsWith("zh")) {
+        if (raw.includes("tw") || raw.includes("hk") || raw.includes("mo") || raw.includes("hant")) return "zh-TW";
+        return "zh-CN";
+      }
+      return "en";
+    }
+
+    function applyLang(code){
+      const t = I18N[code] || I18N.en;
+      document.documentElement.lang = code;
+
+      document.getElementById("navHome").textContent = t.navHome;
+      document.getElementById("navDownload").textContent = t.navDownload;
+      document.getElementById("h1").textContent = t.h1;
+      document.getElementById("subtitle").textContent = t.subtitle;
+      document.getElementById("btnDownload").textContent = t.btnDownload;
+      document.getElementById("btnBili").textContent = t.btnBili;
+      document.getElementById("card1Title").textContent = t.card1Title;
+      document.getElementById("card1Desc").textContent = t.card1Desc;
+      document.getElementById("card2Title").textContent = t.card2Title;
+      document.getElementById("card2Desc").textContent = t.card2Desc;
+      document.getElementById("card3Title").textContent = t.card3Title;
+      document.getElementById("card3Desc").textContent = t.card3Desc;
+
+      const sel = document.getElementById("langSelect");
+      sel.value = code;
+    }
+
+    applyLang(pickLang());
+    document.getElementById("langSelect").addEventListener("change", (e)=>{
+      const code = e.target.value;
+      localStorage.setItem("mcsever_lang", code);
+      applyLang(code);
+    });
+  </script>
 </body>
 </html>
